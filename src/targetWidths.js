@@ -115,9 +115,12 @@ function screenWidths() {
 // Return the widths to generate given the input `sizes`
 // attribute.
 //
+// @param {boolean} useWindow: true if we actually want to utilize
+//    window for calculations; set to false to keep results the same
+//    when rendering on server vs client.
 // @return {Array} An array of {Fixnum} instances representing the unique `srcset` URLs to generate.
-function targetWidths() {
-  var hasWin = typeof window !== 'undefined',
+function targetWidths(useWindow) {
+  var hasWin = (typeof window !== 'undefined' && useWindow),
       allWidths = deviceWidths().concat(screenWidths()),
       selectedWidths = [],
       dpr = hasWin && window.devicePixelRatio ? window.devicePixelRatio : 1,
@@ -145,4 +148,4 @@ function targetWidths() {
   });
 }
 
-module.exports = targetWidths();
+module.exports = targetWidths;

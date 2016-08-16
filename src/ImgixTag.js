@@ -1,5 +1,5 @@
 var util = require('./util.js'),
-    targetWidths = require('./targetWidths.js');
+    widths = require('./targetWidths.js');
 
 var ImgixTag = (function() {
   function ImgixTag(el, opts) {
@@ -134,7 +134,8 @@ var ImgixTag = (function() {
   // scaled appropriately to the same aspect ratio as the base image
   // as appropriate.
   ImgixTag.prototype.srcset = function() {
-    var pairs = [];
+    var targetWidths = widths(true),
+      pairs = [];
 
     for (var i = 0; i < targetWidths.length; i++) {
       pairs.push(this._buildSrcsetPair(targetWidths[i]));
